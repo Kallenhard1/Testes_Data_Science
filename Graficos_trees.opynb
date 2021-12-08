@@ -1,0 +1,58 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sb
+
+base = pd.read_csv('trees.csv')
+base.shape
+
+base.head()
+
+plt.hist(base.iloc[:, 1], bins=6)
+
+sb.distplot(base.iloc[:, 1], hist=True, kde = False, 
+           bins = 6, color = 'blue', 
+           hist_kws = {'edgecolor': 'black'})
+           
+sb.distplot(base.iloc[:, 1], hist = False, kde = True, 
+           bins = 6, color = 'blue', 
+           hist_kws = {'edgecolor': 'black'})
+
+sb.distplot(base.iloc[:, 1], hist = True, kde = True, 
+           bins = 6, color = 'blue', 
+           hist_kws = {'edgecolor': 'black'})
+
+plt.scatter(base.Girth, base.Volume, color = 'blue', facecolors = 'none', marker = '.')
+plt.title('Arvores')
+plt.xlabel('Volume')
+plt.ylabel('Circunferencia')
+
+plt.plot(base.Girth, base.Volume)
+plt.title('Arvores')
+plt.xlabel('Volume')
+plt.ylabel('Circunferencia')
+
+sb.regplot(base.Girth, base.Volume, data = base, x_jitter = 0.3, fit_reg = False)
+
+#Girth com Volume
+plt.scatter(base.Girth, base.Volume)
+
+# Girth com Altura
+plt.scatter(base.Girth, base.Height)
+
+# Heght com Volume
+plt.scatter(base.Height, base.Volume)
+
+plt.hist(base.Volume)
+
+# Plote de 4 telas de uma vez
+plt.figure(1)
+plt.subplot(2, 2, 1)
+plt.scatter(base.Girth, base.Volume)
+plt.subplot(2, 2, 2)
+plt.scatter(base.Girth, base.Height)
+plt.subplot(2,2,3)
+plt.scatter(base.Height, base.Volume, marker = '.')
+plt.subplot(2, 2, 4)
+plt.hist(base.Volume)
+
